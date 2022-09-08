@@ -59,7 +59,7 @@ function game() {
 }
 
 function reportWinner(player, computer) {
-  // this function the results of the game to declare a winner
+  // this function compares the results of the game to declare a winner
   if (player > computer) {
     console.log("CONGRATS! You won the GAME!");
   } else if (player < computer) {
