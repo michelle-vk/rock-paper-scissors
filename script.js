@@ -1,87 +1,67 @@
-const buttons = document.querySelectorAll("button");
+function startGame() {
+  const buttons = document.querySelectorAll("button");
 
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    console.log(button.id, getComputerChoice());
-    // playRound(button.id, getComputerChoice());
-  })
-})
-
-function getComputerChoice() {
-  // function that will randomly return 'rock', 'paper' or 'scissors'
-  // first create an array with all options
-  // then create a random output generator with algorithm
-  // use length of array to return an output
-
-  const elementOptions = ["rock", "paper", "scissors"];
-  const elementAlgorithm = Math.floor(Math.random() * elementOptions.length);
-  const computerChoice = elementOptions[elementAlgorithm];
-  return computerChoice;
+  // Add click handler on all game buttons
+  buttons.forEach(button => 
+    button.addEventListener("click", buttonClickHandler)
+  );
 }
 
-function playRound(playerSelection, computerSelection) {
-  // write logic with if else statement comparing the computer's selection with player selection to see who has won.
-  if (playerSelection === computerSelection) {
-    return "It's a Tie!"
-  } else if ((playerSelection === "rock") && (computerSelection === "scissors")){
-    return "You Won! Rock beats Scissors";
-  } else if ((playerSelection === "rock") && (computerSelection === "paper")) {
-    return "You Lose! Paper beats Rock";
-  } else if ((playerSelection === "scissors") && (computerSelection === "paper")) {
-    return "You Won! Scissors beats Paper";
-  } else if ((playerSelection === "scissors") && (computerSelection === "rock")) {
-    return "You Lose! Rock beats Scissors";
-  } else if ((playerSelection === "paper") && (computerSelection === "scissors")) {
-    return "You Lose! Scissors beats Paper";
-  } else if ((playerSelection === "paper") && (computerSelection === "rock")) {
-    return "You Won! Paper beats Rock";
+function buttonClickHandler(event) {
+  const button = event.currentTarget;
+  
+  // We pass in the player/cpu choices and update the score.
+  updateScore(button.id, cpuPlayerMove());
+
+  console.log(scoreboard);
+
+  // If we have 5 wins, we declare winner.
+  if(scoreboard.player === 5 || scoreboard.cpuPlayer === 5){
+    declareWinner();
   } else {
-    return "Please enter a valid option";
+    // TODO: Update DOM with new scoreboard
   }
-
 }
 
-function game() {
-  // const playerSelection = prompt("Choose rock, paper or scissors", "rock").toLowerCase();
-  // const computerSelection = getComputerChoice();
-  // keep track of the results of each round to be able to declare a winner
-  let playerResult = 0;
-  let computerResult = 0;
-  // for(let i = 0; i < 5; i++) {
-  //   let playerSelection = prompt("Choose rock, paper or scissors", "rock").toLowerCase();
-    // let play = playRound(playerSelection, computerSelection);
-  //   if (play.includes("Won")) {
-  //     playerResult += 1;
-  //   } else if (play.includes("Lose")) {
-  //     computerResult += 1;
-  //   } else if (play.includes("Tie")){
-  //     playerResult += 0;
-  //     computerResult += 0;
-  //   } else {
-  //     console.log("Non valid");
-  //   }
-  // }
-
-  const results = `Score player: ${playerResult} - Score computer: ${computerResult}`;
-  console.log(results);
-  reportWinner(playerResult, computerResult);
+function cpuPlayerMove() {
+  // Randomly choose an option for the CPU player.
+  const options = ["rock", "paper", "scissors"];
+  const optionIndex = Math.floor(Math.random() * options.length);
+  const choice = options[optionIndex];
+  return choice;
 }
 
-function reportWinner(player, computer) {
-  // this function compares the results of the game to declare a winner
-  if (player > computer) {
-    console.log("CONGRATS! You won the GAME!");
-  } else if (player < computer) {
+function updateScore(player, cpuPlayer) {
+  if (player === "rock" && cpuPlayer === "scissors"){
+    scoreboard.player += 1;
+  } else if (player === "rock" && cpuPlayer === "paper") {
+    scoreboard.cpuPlayer += 1;
+  } else if (player === "scissors" && cpuPlayer === "paper") {
+    scoreboard.player += 1;
+  } else if (player === "scissors" && cpuPlayer === "rock") {
+    scoreboard.cpuPlayer += 1;
+  } else if (player === "paper" && cpuPlayer === "scissors") {
+    scoreboard.cpuPlayer += 1;
+  } else if (player === "paper" && cpuPlayer === "rock") {
+    scoreboard.player += 1;
+  }
+}
+
+function declareWinner() {
+  // TODO: Update DOM with winner
+
+  // Compares the results of the game to declare a winner
+  if (scoreboard.player > scoreboard.cpuPlayer) {
+    console.log("CONGRATS! You won the GAME with!");
+  } else if (scoreboard.player < scoreboard.cpuPlayer) {
     console.log("I'm sorry, but you lost. The computer won the game.");
   } else {
     console.log("It's a tie! Nobody won or lost");
   }
 }
 
+// Create scoreboard
+const scoreboard = { player: 0, cpuPlayer: 0 };
 
-
-game()
-
-
-
-
+// Start game
+startGame();
