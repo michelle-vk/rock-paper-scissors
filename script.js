@@ -1,3 +1,12 @@
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    console.log(button.id, getComputerChoice());
+    // playRound(button.id, getComputerChoice());
+  })
+})
+
 function getComputerChoice() {
   // function that will randomly return 'rock', 'paper' or 'scissors'
   // first create an array with all options
@@ -34,24 +43,24 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   // const playerSelection = prompt("Choose rock, paper or scissors", "rock").toLowerCase();
-  const computerSelection = getComputerChoice();
+  // const computerSelection = getComputerChoice();
   // keep track of the results of each round to be able to declare a winner
   let playerResult = 0;
   let computerResult = 0;
-  for(let i = 0; i < 5; i++) {
-    let playerSelection = prompt("Choose rock, paper or scissors", "rock").toLowerCase();
-    let play = playRound(playerSelection, computerSelection);
-    if (play.includes("Won")) {
-      playerResult += 1;
-    } else if (play.includes("Lose")) {
-      computerResult += 1;
-    } else if (play.includes("Tie")){
-      playerResult += 0;
-      computerResult += 0;
-    } else {
-      console.log("Non valid");
-    }
-  }
+  // for(let i = 0; i < 5; i++) {
+  //   let playerSelection = prompt("Choose rock, paper or scissors", "rock").toLowerCase();
+    // let play = playRound(playerSelection, computerSelection);
+  //   if (play.includes("Won")) {
+  //     playerResult += 1;
+  //   } else if (play.includes("Lose")) {
+  //     computerResult += 1;
+  //   } else if (play.includes("Tie")){
+  //     playerResult += 0;
+  //     computerResult += 0;
+  //   } else {
+  //     console.log("Non valid");
+  //   }
+  // }
 
   const results = `Score player: ${playerResult} - Score computer: ${computerResult}`;
   console.log(results);
@@ -68,6 +77,8 @@ function reportWinner(player, computer) {
     console.log("It's a tie! Nobody won or lost");
   }
 }
+
+
 
 game()
 
