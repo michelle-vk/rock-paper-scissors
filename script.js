@@ -20,6 +20,7 @@ function buttonClickHandler(event) {
     declareWinner();
   } else {
     // TODO: Update DOM with new scoreboard
+    results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
   }
 }
 
@@ -48,20 +49,26 @@ function updateScore(player, cpuPlayer) {
 }
 
 function declareWinner() {
-  // TODO: Update DOM with winner
+  // updates the score
+  results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
+  
+  // create seperate div to declare winner
+  const winner = document.createElement("div");
+  results.appendChild(winner);
 
   // Compares the results of the game to declare a winner
   if (scoreboard.player > scoreboard.cpuPlayer) {
-    console.log("CONGRATS! You won the GAME with!");
+    winner.textContent = "CONGRATS! You won the GAME";
   } else if (scoreboard.player < scoreboard.cpuPlayer) {
-    console.log("I'm sorry, but you lost. The computer won the game.");
+    winner.textContent = "I'm sorry, but you lost. The computer won the game.";
   } else {
-    console.log("It's a tie! Nobody won or lost");
+    winner.textContent = "It's a tie! Nobody won or lost";
   }
 }
 
-// Create scoreboard
-const scoreboard = { player: 0, cpuPlayer: 0 };
+// Create scoreboard and a div to show results
+const scoreboard = { player: 0, cpuPlayer: 0 }; 
+const results = document.querySelector(".results");
 
 // Start game
 startGame();
