@@ -88,10 +88,10 @@ function resetGame(event) {
 
 // Select buttons, create scoreboard and a div to show results
 const buttons = document.querySelectorAll("button");
-const gameButtons = document.querySelectorAll(".gameBtn");
+const gameButtons = document.querySelectorAll(".game-btn");
 const scoreboard = { player: 0, cpuPlayer: 0 }; 
 const results = document.querySelector(".results");
-const resetGameButton = document.querySelector(".resetGame");
+const resetGameButton = document.querySelector(".reset-game");
 
 // Set an event listener on the reset/play again button
 resetGameButton.addEventListener("click", resetGame);

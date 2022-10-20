@@ -1,0 +1,16 @@
+h1 {
+  display: flex;
+  justify-content: center;
+  color: teal;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.game-container .results {
+  color: blue;
+}
