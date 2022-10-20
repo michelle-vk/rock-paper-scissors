@@ -3,8 +3,9 @@ function startGame() {
   buttons.forEach(button => 
     button.addEventListener("click", buttonClickHandler)
   );
-  // Hide the reset/play again button while playing the game
+  // Hide the reset/play again button and score title while playing the game
   resetGameButton.style.visibility = "hidden";
+  scoreTitle.style.visibility = "hidden";
 }
 
 function buttonClickHandler(event) {
@@ -57,6 +58,7 @@ function displayScore(button) {
   if (button.id === "rock" || button.id === "paper" || button.id === "scissors") {
     gameButtons.forEach(button => {
       results.style.visibility = "visible";
+      scoreTitle.style.visibility = "visible";
     })
     } else {
       results.style.visibility = "hidden";
@@ -67,8 +69,9 @@ function declareWinner() {
   // Updates the score
   results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
 
-  // Show the reset/ play again button
+  // Show the reset/ play again button and score title
   resetGameButton.style.visibility = "visible";
+  scoreTitle.style.visibility = "visible";
   
   // Creates seperate div to declare winner
   const winner = document.createElement("div");
@@ -94,16 +97,18 @@ function resetGame(event) {
     button.disabled = false
   );
   
-  // Hide the reset/play again button after clicking on it to play again
+  // Hide the reset/play again button after clicking on it to play again and hide score title
   resetGameButton.style.visibility = "hidden";
+  scoreTitle.style.visibility = "hidden";
 }
 
-// Select buttons, create scoreboard and a div to show results
+// Create scoreboard, select buttons and tag, and create a div to show results
+const scoreboard = { player: 0, cpuPlayer: 0 }; 
 const buttons = document.querySelectorAll("button");
 const gameButtons = document.querySelectorAll(".game-btn");
-const scoreboard = { player: 0, cpuPlayer: 0 }; 
-const results = document.querySelector(".results");
 const resetGameButton = document.querySelector(".reset-game");
+const scoreTitle = document.querySelector("h2");
+const results = document.querySelector(".results");
 
 // Set an event listener on the reset/play again button
 resetGameButton.addEventListener("click", resetGame);
