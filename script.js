@@ -1,31 +1,34 @@
 function startGame() {
-  const buttons = document.querySelectorAll("button");
-
   // Add click handler on all game buttons
   buttons.forEach(button => 
     button.addEventListener("click", buttonClickHandler)
   );
+  // Hide the reset/play again button while playing the game
+  resetGameButton.style.display = "none";
 }
 
 function buttonClickHandler(event) {
   const button = event.currentTarget;
   
-  // We pass in the player/cpu choices and update the score.
+  // We pass in the player/cpu choices and update the score
   updateScore(button.id, cpuPlayerMove());
 
   console.log(scoreboard);
 
-  // If we have 5 wins, we declare winner.
+  // If we have 5 wins, we declare winner and disable game buttons
   if(scoreboard.player === 5 || scoreboard.cpuPlayer === 5){
     declareWinner();
+    gameButtons.forEach(button => 
+      button.disabled = true
+    );
   } else {
-    // TODO: Update DOM with new scoreboard
+    // Update DOM with new scoreboard
     results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
   }
 }
 
 function cpuPlayerMove() {
-  // Randomly choose an option for the CPU player.
+  // Randomly choose an option for the CPU player
   const options = ["rock", "paper", "scissors"];
   const optionIndex = Math.floor(Math.random() * options.length);
   const choice = options[optionIndex];
@@ -49,10 +52,13 @@ function updateScore(player, cpuPlayer) {
 }
 
 function declareWinner() {
-  // updates the score
+  // Updates the score
   results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
+
+  // Show the reset/ play again button
+  resetGameButton.style.display = "block";
   
-  // create seperate div to declare winner
+  // Creates seperate div to declare winner
   const winner = document.createElement("div");
   results.appendChild(winner);
 
@@ -64,11 +70,31 @@ function declareWinner() {
   } else {
     winner.textContent = "It's a tie! Nobody won or lost";
   }
+
 }
 
-// Create scoreboard and a div to show results
+// Reset score and activate the game buttons
+function resetGame(event) {
+  scoreboard.player = 0;
+  scoreboard.cpuPlayer = 0;
+  results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
+  buttonClickHandler(event);
+  gameButtons.forEach(button => 
+    button.disabled = false
+  );
+  // Hide the reset/play again button after clicking on it to play again
+  resetGameButton.style.display = "none";
+}
+
+// Select buttons, create scoreboard and a div to show results
+const buttons = document.querySelectorAll("button");
+const gameButtons = document.querySelectorAll(".gameBtn");
 const scoreboard = { player: 0, cpuPlayer: 0 }; 
 const results = document.querySelector(".results");
+const resetGameButton = document.querySelector(".resetGame");
+
+// Set an event listener on the reset/play again button
+resetGameButton.addEventListener("click", resetGame);
 
 // Start game
 startGame();
