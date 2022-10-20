@@ -3,9 +3,10 @@ function startGame() {
   buttons.forEach(button => 
     button.addEventListener("click", buttonClickHandler)
   );
-  // Hide the reset/play again button and score title while playing the game
+  // Hide the reset/play again button, score title and winner icon while playing the game
   resetGameButton.style.visibility = "hidden";
   scoreTitle.style.visibility = "hidden";
+  winnerIcon.style.visibility = "hidden";
 }
 
 function buttonClickHandler(event) {
@@ -80,6 +81,7 @@ function declareWinner() {
   // Compares the results of the game to declare a winner
   if (scoreboard.player > scoreboard.cpuPlayer) {
     winner.textContent = "CONGRATS! You won the GAME";
+    winnerIcon.style.visibility = "visible";
   } else if (scoreboard.player < scoreboard.cpuPlayer) {
     winner.textContent = "I'm sorry, but you lost. The computer won the game.";
   } else {
@@ -97,9 +99,10 @@ function resetGame(event) {
     button.disabled = false
   );
   
-  // Hide the reset/play again button after clicking on it to play again and hide score title
+  // Hide the reset/play again button after clicking on it to play again and hide score title and winner icon
   resetGameButton.style.visibility = "hidden";
   scoreTitle.style.visibility = "hidden";
+  winnerIcon.style.visibility = "hidden";
 }
 
 // Create scoreboard, select buttons and tag, and create a div to show results
@@ -109,6 +112,7 @@ const gameButtons = document.querySelectorAll(".game-btn");
 const resetGameButton = document.querySelector(".reset-game");
 const scoreTitle = document.querySelector("h2");
 const results = document.querySelector(".results");
+const winnerIcon = document.querySelector(".winner-icon");
 
 // Set an event listener on the reset/play again button
 resetGameButton.addEventListener("click", resetGame);
