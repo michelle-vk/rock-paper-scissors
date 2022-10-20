@@ -4,7 +4,7 @@ function startGame() {
     button.addEventListener("click", buttonClickHandler)
   );
   // Hide the reset/play again button while playing the game
-  resetGameButton.style.display = "none";
+  resetGameButton.style.visibility = "hidden";
 }
 
 function buttonClickHandler(event) {
@@ -13,14 +13,15 @@ function buttonClickHandler(event) {
   // We pass in the player/cpu choices and update the score
   updateScore(button.id, cpuPlayerMove());
 
+  // Call function displayScore which decides so show results or not depending on active play status
+  displayScore(button);
+  
   console.log(scoreboard);
 
   // If we have 5 wins, we declare winner and disable game buttons
   if(scoreboard.player === 5 || scoreboard.cpuPlayer === 5){
     declareWinner();
-    gameButtons.forEach(button => 
-      button.disabled = true
-    );
+    gameButtons.forEach(button => button.disabled = true);
   } else {
     // Update DOM with new scoreboard
     results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
@@ -51,12 +52,23 @@ function updateScore(player, cpuPlayer) {
   }
 }
 
+function displayScore(button) {
+  // Show the score while playing the game or else hide it
+  if (button.id === "rock" || button.id === "paper" || button.id === "scissors") {
+    gameButtons.forEach(button => {
+      results.style.visibility = "visible";
+    })
+    } else {
+      results.style.visibility = "hidden";
+    }
+}
+
 function declareWinner() {
   // Updates the score
   results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
 
   // Show the reset/ play again button
-  resetGameButton.style.display = "block";
+  resetGameButton.style.visibility = "visible";
   
   // Creates seperate div to declare winner
   const winner = document.createElement("div");
@@ -77,13 +89,13 @@ function declareWinner() {
 function resetGame(event) {
   scoreboard.player = 0;
   scoreboard.cpuPlayer = 0;
-  results.textContent = `Player: ${scoreboard.player} - Computer: ${scoreboard.cpuPlayer}`;
   buttonClickHandler(event);
   gameButtons.forEach(button => 
     button.disabled = false
   );
+  
   // Hide the reset/play again button after clicking on it to play again
-  resetGameButton.style.display = "none";
+  resetGameButton.style.visibility = "hidden";
 }
 
 // Select buttons, create scoreboard and a div to show results
