@@ -18,8 +18,6 @@ function buttonClickHandler(event) {
   // Call function displayScore which decides so show results or not depending on active play status
   displayScore(button);
   
-  console.log(scoreboard);
-
   // If we have 5 wins, we declare winner and disable game buttons
   if(scoreboard.player === 5 || scoreboard.cpuPlayer === 5){
     declareWinner();
