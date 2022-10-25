@@ -19,7 +19,7 @@ function buttonClickHandler(event) {
   displayScore(button);
   
   // If we have 5 wins, we declare winner and disable game buttons
-  if(scoreboard.player === 5 || scoreboard.cpuPlayer === 5){
+  if (scoreboard.player === 5 || scoreboard.cpuPlayer === 5) {
     declareWinner();
     gameButtons.forEach(button => button.disabled = true);
   } else {
@@ -37,7 +37,7 @@ function cpuPlayerMove() {
 }
 
 function updateScore(player, cpuPlayer) {
-  if (player === "rock" && cpuPlayer === "scissors"){
+  if (player === "rock" && cpuPlayer === "scissors") {
     scoreboard.player += 1;
   } else if (player === "rock" && cpuPlayer === "paper") {
     scoreboard.cpuPlayer += 1;
@@ -59,9 +59,9 @@ function displayScore(button) {
       results.style.visibility = "visible";
       scoreTitle.style.visibility = "visible";
     })
-    } else {
-      results.style.visibility = "hidden";
-    }
+  } else {
+    results.style.visibility = "hidden";
+  }
 }
 
 function declareWinner() {
@@ -85,7 +85,6 @@ function declareWinner() {
   } else {
     winner.textContent = "It's a tie! Nobody won or lost";
   }
-
 }
 
 // Reset score and activate the game buttons
