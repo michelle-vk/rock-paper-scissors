@@ -57,6 +57,7 @@ button:hover {
   padding: 20px;
   margin: 20px;
   height: 700px;
+  box-shadow: 0 0 7px teal;
 }
 
 .game-container .results {
