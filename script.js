@@ -113,7 +113,7 @@ function resetGame(event) {
   winnerIcon.style.visibility = "hidden";
 }
 
-// Create scoreboard, select buttons and tag, and create a div to show results
+// Create scoreboard, select buttons and tag, and create a div to show selections and results
 const scoreboard = { player: 0, cpuPlayer: 0 }; 
 const buttons = document.querySelectorAll("button");
 const gameButtons = document.querySelectorAll(".game-btn");
