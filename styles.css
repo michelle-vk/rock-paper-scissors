@@ -67,6 +67,17 @@ button:hover {
   line-height: 1.5em;
 }
 
+.selections {
+  color: teal;
+}
+
+.selections .playerSelection,
+.selections .cpuSelection {
+  color: #019494;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
 .winner-icon img {
   width: 350px;
 }

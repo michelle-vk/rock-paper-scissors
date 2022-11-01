@@ -3,9 +3,10 @@ function startGame() {
   buttons.forEach(button => 
     button.addEventListener("click", buttonClickHandler)
   );
-  // Hide the reset/play again button, score title and winner icon while playing the game
+  // Hide the reset/play again button, score title, selections and winner icon while playing the game
   resetGameButton.style.visibility = "hidden";
   scoreTitle.style.visibility = "hidden";
+  selections.style.visibility = "hidden";
   winnerIcon.style.visibility = "hidden";
 }
 
@@ -36,7 +37,8 @@ function cpuPlayerMove() {
   return choice;
 }
 
-function updateScore(player, cpuPlayer) {
+function updateScore(...args) {
+  const [player, cpuPlayer] = args;
   if (player === "rock" && cpuPlayer === "scissors") {
     scoreboard.player += 1;
   } else if (player === "rock" && cpuPlayer === "paper") {
@@ -50,6 +52,13 @@ function updateScore(player, cpuPlayer) {
   } else if (player === "paper" && cpuPlayer === "rock") {
     scoreboard.player += 1;
   }
+
+  showSelections(player, cpuPlayer);
+}
+
+function showSelections(player, cpuPlayer) {
+  playerSelection.textContent = `${player}`.toUpperCase();
+  cpuSelection.textContent = `${cpuPlayer}`.toUpperCase();
 }
 
 function displayScore(button) {
@@ -58,6 +67,7 @@ function displayScore(button) {
     gameButtons.forEach(button => {
       results.style.visibility = "visible";
       scoreTitle.style.visibility = "visible";
+      selections.style.visibility = "visible";
     })
   } else {
     results.style.visibility = "hidden";
@@ -96,9 +106,10 @@ function resetGame(event) {
     button.disabled = false
   );
   
-  // Hide the reset/play again button after clicking on it to play again and hide score title and winner icon
+  // Hide the reset/play again button after clicking on it to play again and hide score title, selections and winner icon
   resetGameButton.style.visibility = "hidden";
   scoreTitle.style.visibility = "hidden";
+  selections.style.visibility = "hidden";
   winnerIcon.style.visibility = "hidden";
 }
 
@@ -108,6 +119,9 @@ const buttons = document.querySelectorAll("button");
 const gameButtons = document.querySelectorAll(".game-btn");
 const resetGameButton = document.querySelector(".reset-game");
 const scoreTitle = document.querySelector("h2");
+const selections = document.querySelector(".selections");
+const playerSelection = document.querySelector(".playerSelection");
+const cpuSelection = document.querySelector(".cpuSelection");
 const results = document.querySelector(".results");
 const winnerIcon = document.querySelector(".winner-icon");
 
